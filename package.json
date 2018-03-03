@@ -1,0 +1,21 @@
+{
+  "name": "ephemera",
+  "version": "1.0.0",
+  "description": "Initial Landing Page ![alt text](https://raw.githubusercontent.com/madkcat/ephemera/master/public/images/Index%20html%20copy.jpg)",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/madkcat/ephemera.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/madkcat/ephemera/issues"
+  },
+  "homepage": "https://github.com/madkcat/ephemera#readme"
+}
