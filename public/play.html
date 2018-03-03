@@ -8,34 +8,46 @@
 		<title>Trivia-Game Play</title>
 		<!-- Compiled and minified CSS -->
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
-		<link rel="stylesheet" href="css/styles.css" media="screen" title="no title">
+		<link rel="stylesheet" href="./css/style.css">
 		<script src="https://code.jquery.com/jquery.js"></script>
 	</head>
 
 	<body>
 		<div class = "container">
-			<div class = "divider"></div>
-				<div class = "section" id = "question-view">
-					<h3>Question</h3>
-
+				<div class="home-header">
+						<h1 class="header center">Let's Go!</h1>
+						<div class = "center-align">
+						<a class = "waves-effect waves-light btn" id = "startGame">Start!</a>
+						</div>
 				</div>
-			<div class = "divider"></div>
-				<div class = "section" id = "answer-view">
+			<div id = "question-view">
+					<h3>Question</h3>
+			</div>
+			<hr>
+				
+			<div id = "answer-view">
 					<h3>Answer Choices</h3>
 					<a class = "waves-effect waves-light btn" id = "answer-choice-1"></a>
-					<a class = "waves-effect waves-light btn" id = "answer-choice-1"></a>
-					<a class = "waves-effect waves-light btn" id = "answer-choice-1"></a>
-					<a class = "waves-effect waves-light btn" id = "answer-choice-1"></a>
-				</div>
-			<div class = "divider"></div>
-				<div class = "section" id = "timer-view"></div>
+					<br>
+					<br>
+					<a class = "waves-effect waves-light btn" id = "answer-choice-2"></a>
+					<br>
+					<br>
+					<a class = "waves-effect waves-light btn" id = "answer-choice-3"></a>
+					<br>
+					<br>
+					<a class = "waves-effect waves-light btn" id = "answer-choice-4"></a>
+			</div>
+			<div id = "timer-view">
+			<h4>Timer</h4>
 			</div>
 		</div>
   
 	</body>
 
 <script type = "text/javascript">
-	$(".startGame").on("click", function() {
+
+	$("#startGame").on("click", function() {
 		$(this).hide(1000);
 		game.loadQuestion();
 });
@@ -68,7 +80,7 @@ var game = {
 	loadQuestion: function() {
 		timer = setInterval(game.countdownTime, 1000);
 		$("#result").empty();
-		$("#question").html(questions[game.currentQuest].question);
+		$("#question-view").html(questions[game.currentQuest].question);
 		for (var i = 0; i < questions[game.currentQuest].answers.length;
 			i++) {
 				var a = $("<button>");
@@ -76,7 +88,7 @@ var game = {
 				a.attr("data-name", questions[game.currentQuest].
 					answers[i]);
 				a.text(questions[game.currentQuest].answers[i]);
-				$("#buttons-view").append(a);
+				$("#answer-view").append(a);
 
 
 		}	
