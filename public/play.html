@@ -24,10 +24,14 @@
 					<h3>Question</h3>
 			</div>
 			<hr>
-				
+			
+			<div id = "timer-view">
+				<h4>Timer</h4>
+			</div>
+			<hr>
 			<div id = "answer-view">
 					<h3>Answer Choices</h3>
-					<a class = "waves-effect waves-light btn" id = "answer-choice-1"></a>
+					<!--<a class = "waves-effect waves-light btn" id = "answer-choice-1"></a>
 					<br>
 					<br>
 					<a class = "waves-effect waves-light btn" id = "answer-choice-2"></a>
@@ -37,12 +41,11 @@
 					<br>
 					<br>
 					<a class = "waves-effect waves-light btn" id = "answer-choice-4"></a>
+			</div>-->
+			
 			</div>
-			<div id = "timer-view">
-			<h4>Timer</h4>
-			</div>
-		</div>
-  
+			<hr>
+			<div id = "result"></div>
 	</body>
 
 <script type = "text/javascript">
@@ -60,6 +63,27 @@
 	$(document).on("click", ".reset", function() {
 		game.reset();
 })
+
+var questions = [{
+	question: "Who was the 'Man in Black'?", 
+	answers: ["Willie Nelson", "Johnny Cash", "Mel Tillis", 
+	"Porter Wagoner"],
+	correctAnswer: "Johnny Cash"
+	},
+
+	{
+	question: "Which song was not a hit for Lefty Frizzell?",
+	answers: ["Saginaw, Michigan", "Always Late", "Detroit City", 
+	"Long, Black Veil"], 
+	correctAnswer: "Detroit City"
+},
+
+	{
+	question: "Who is known as the 'Red Headed Stranger'?", 
+	answers: ["Willie Nelson", "Buck Owens", "Charlie Pride", "Waylon Jennings"], 
+	correctAnswer: "Willie Nelson"
+},
+];
 
 var game = {
 	questions:questions,
@@ -79,6 +103,7 @@ var game = {
 
 	loadQuestion: function() {
 		timer = setInterval(game.countdownTime, 1000);
+		$("#answer-view").empty();
 		$("#result").empty();
 		$("#question-view").html(questions[game.currentQuest].question);
 		for (var i = 0; i < questions[game.currentQuest].answers.length;
