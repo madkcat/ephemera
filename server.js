@@ -5,8 +5,6 @@
 // *** Dependencies
 // =============================================================
 const path = require('path');
-const express = require('express');
-const app = express();
 const passport = require('passport');
 const session = require('express-session');
 const bodyParser = require('body-parser');
@@ -14,7 +12,9 @@ const env = require('dotenv').load();
 
 // Sets up the Express App
 // =============================================================
+const express = require('express');
 const app = express();
+
 const PORT = process.env.PORT || 8080;
 
 // Requiring our models for syncing
