@@ -27,12 +27,12 @@
 			
 			<div id = "timer-view">
 					<h4>Timer</h4>
-				<div id = "countdown">
+				<!--<div id = "countdown">
 					<div id = "countdown-number"></div>
 					<svg>
 						<circle r = "18" cx = "20" cy = "20"></circle>
 					</svg>
-				</div>
+				</div>-->
 			</div>
 			<hr>
 			<div id = "answer-view">
@@ -144,14 +144,14 @@ var questions = [{
 var game = {
 	questions:questions,
 	currentQuest:0,
-	countdown:20,
+	counter:20,
 	correctAnswer:0,
 	incorrectAnswer:0,
 	unanswered:0,
 
 	countdownTime: function() {
 		game.counter--;
-		$("#time").html(game.counter + " seconds left");
+		$("#timer-view").html(game.counter + " seconds left");
 		if (game.counter <= 0) {
 			game.timesUp();
 		}
