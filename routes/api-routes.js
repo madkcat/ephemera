@@ -15,7 +15,7 @@ module.exports = function(app) {
   // GET route for getting all of the todos
   app.get("/api/todos", function(req, res) {
     // findAll returns all entries for a table when used with no options
-    db.Todo.findAll({}).then(function(dbTodo) {
+    db.Questions.findAll({}).then(function(dbTodo) {
       // We have access to the todos as an argument inside of the callback function
       res.json(dbTodo);
     });
@@ -36,14 +36,5 @@ module.exports = function(app) {
     });
   });
 
-  // DELETE route for deleting todos. We can get the id of the todo we want to delete from
-  // req.params.id
-  app.delete("/api/questions/:id", function(req, res) {
 
-  });
-
-  // PUT route for updating todos. We can get the updated todo from req.body
-  app.put("/api/questions", function(req, res) {
-
-  });
 };
