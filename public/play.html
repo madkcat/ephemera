@@ -26,7 +26,13 @@
 			<hr>
 			
 			<div id = "timer-view">
-				<h4>Timer</h4>
+					<h4>Timer</h4>
+				<div id = "countdown">
+					<div id = "countdown-number"></div>
+					<svg>
+						<circle r = "18" cx = "20" cy = "20"></circle>
+					</svg>
+				</div>
 			</div>
 			<hr>
 			<div id = "answer-view">
@@ -46,6 +52,11 @@
 			</div>
 			<hr>
 			<div id = "result"></div>
+			<div id = "result1"></div>
+			<div id = "result2"></div>
+			<div id = "result3"></div>
+			<div id = "result4"></div>
+			<div id = "result5"></div>
 	</body>
 
 <script type = "text/javascript">
@@ -83,12 +94,57 @@ var questions = [{
 	answers: ["Willie Nelson", "Buck Owens", "Charlie Pride", "Waylon Jennings"], 
 	correctAnswer: "Willie Nelson"
 },
+
+{ 
+	question: "Who got their big break on The Porter Wagoner Show?", 
+	answers: ["Patsy Cline", "Marty Robbins", "Charlie Walker", "Dolly Parton"], 
+	correctAnswer:"Dolly Parton"
+},
+
+	{
+	question: "Which is not a Loretta Lynn song?", 
+	answers: ["The End of the World", "Coal Miner's Daughter", "Fist City", 
+	"The Pill"],
+	correctAnswer: "The End of the World"
+},
+
+	{ 
+	question: "Which of the following was a George Jones hit?", 
+	answers: ["The Streets of Baltimore", "A Boy Named Sue", "The Grand Tour", 
+	"Crazy"],
+	correctAnswer: "The Grand Tour"
+},
+
+	{ 
+	question: "Who wrote the song 'Sunday Morning Coming Down'?", 
+	answers: ["Johnny Cash", "Kris Kristofferson", "Willie Nelson", "Bill Anderson"], 
+	correctAnswer: "Kris Kristofferson"
+},
+
+	{
+	question: "Who sang the duet 'Golden Ring'?", 
+	answers: ["Dolly Parton and Porter Wagoner", "Johnny Cash and June Carter Cash", 
+	"George Jones and Tammy Wynette", "Conway Twitty and Loretta Lynn"], 
+	correctAnswer: "George Jones and Tammy Wynette"
+},
+
+	{ 
+	question: "Whose early hits included 'Sing Me Back Home'?", 
+	answers: ["Marty Robbins", "Eddie Arnold", "Merle Haggard", "Buck Owens"],
+	correctAnswer: "Merle Haggard"
+},
+
+	{
+	question: "Who sang the 1952 hit 'The Wild Side of Life'?", 
+	answers: ["Hank Thompson", "Hank Williams", "Ray Price", "Faron Young"], 
+	correctAnswer:"Hank Thompson"
+}
 ];
 
 var game = {
 	questions:questions,
 	currentQuest:0,
-	counter:20,
+	countdown:20,
 	correctAnswer:0,
 	incorrectAnswer:0,
 	unanswered:0,
@@ -100,6 +156,7 @@ var game = {
 			game.timesUp();
 		}
 	},
+
 
 	loadQuestion: function() {
 		timer = setInterval(game.countdownTime, 1000);
@@ -132,7 +189,7 @@ var game = {
 		$("#result2").html("Correct Answers: " +game.correctAnswer);
 		$("#result3").html("Incorrect Answers: " +game.incorrectAnswer);
 		$("#result4").html("Unanswered: " +game.unanswered);
-		$("#result5").html("<button class='reset btn-primary'>Play Again</button>");
+		$("#result5").html("<button class='reset btn-primary' id = 'startGame'>Play Again</button>");
 	},
 
 
@@ -184,6 +241,7 @@ var game = {
 		game.incorrect = 0;
 		game.unanswered = 0;
 		$("#buttons-view").empty();
+		$("#answer-view").empty();
 		$("#result").empty();
 		$("#result1").empty();
 		$("#result2").empty();
