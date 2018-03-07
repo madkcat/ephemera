@@ -14,7 +14,7 @@ module.exports = function(app) {
 
   // cms route loads cms.html
   app.get("/questions", function(req, res) {
-    res.sendFile(path.join(__dirname, "../public/questions.html"));
+    res.sendFile(path.join(__dirname, "../public/play.html"));
   });
 
 
