@@ -1,8 +1,10 @@
 module.exports = function(sequelize, DataTypes) {
-    var Questions = sequelize.define("Questions", {
-      text: DataTypes.STRING,
-      complete: DataTypes.BOOLEAN
+    var hiScore = sequelize.define("hiScore", {
+      user: DataTypes.STRING,
+      correct: DataTypes.INTEGER,
+      incorrect: DataTypes.INTEGER
+      // paranoid: true
+
     });
-    return Questions;
+    return hiScore;
   };
-  
