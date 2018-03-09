@@ -31,10 +31,11 @@
 		</div>
 	</div>
 
-
+	<div class="container">
 	<div id="question-view">
 		<!-- <h3>Question</h3> -->
 	</div>
+</div>
 	<!-- <hr> -->
 
 	<div id="timer-view">
@@ -46,6 +47,9 @@
 					</svg>
 				</div>-->
 	</div>
+	<br>
+	<br>
+	<br>
 	<!-- <hr> -->
 	<div id="answer-view">
 		<!-- <h3>Answer Choices</h3> -->
@@ -76,6 +80,7 @@
 <script type="text/javascript">
 var questions;
 var timer;
+
 	// $("#startGame").on("click", function () {
 	// 	$(this).hide(1000);
 	// 	game.loadQuestion();
@@ -95,13 +100,13 @@ var timer;
 					if(right){
 						$("#answer-view").html("You Got It Right");
 					} else {
-						$("#answer-view").html("You Got It Wrong....Correct Answer Is... " + correctAnswer);
+						$("#answer-view").html("You Got It Wrong....Correct Answer Is... " );
 					}
 					setTimeout(function() {funkyFresh()}, 5000);
 					clearInterval(timer);
 					reset();
-	   
             }
+
 function funkyFresh(){
 	$.get('/api/questions', function(questions) {
     console.log(questions);
@@ -133,7 +138,12 @@ function funkyFresh(){
 }
 
 	$('#startGame').on('click', function() {
-    funkyFresh();
+		$(this).addClass("hideButton");
+		
+		if(!timer){
+			funkyFresh();
+		}
+   
 });
 
 

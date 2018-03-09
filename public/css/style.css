@@ -40,6 +40,11 @@ body {
   background-color: rgb(187, 4, 187);
   font-size: 30px;
   margin-bottom: 2%;
+  
+}
+.hideButton{
+  visibility: hidden;
+  
 }
 
 /* answer buttons */
@@ -61,6 +66,7 @@ body {
   width: 40px;
   text-align: center;
 }
+
 
 #countdown-number {
   color: white;
