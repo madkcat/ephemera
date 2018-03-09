@@ -37,6 +37,26 @@ con.connect(function(err) {
     console.log(result);
   });
 });
+
+// var con = mysql.createConnection({
+//   host: "localhost",
+//   user: "root",
+//   password: "root",
+//   database: "ephemera",
+//   port: 8889
+// });
+
+
+
+// app.get("/api/questions", function(req, res, err) {
+//   con.connect(function(err) {
+//     if (err) throw err;
+//     con.query("SELECT * FROM qs", function (err, result, fields) {
+//       if (err) throw err;
+//       res.json(result);
+//     });
+//   });
+// });
 // Requiring our models for syncing
 const db = require("./models");
 const models = require('./models');
