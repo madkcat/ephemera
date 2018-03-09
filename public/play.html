@@ -92,46 +92,43 @@ var timer;
 	// 	game.reset();
 	// })
 	function youGotIt(correctAnswer, guessedAnswer){
-                const right = correctAnswer === guessedAnswer
-//                 alert(`You Got It....${right ? 'Right': 'Wrong'}`);
-					if(right){
-						$("#answer-view").html("You Got It Right");
-					} else {
-						$("#answer-view").html("You Got It Wrong....Correct Answer Is... " );
-					}
-					setTimeout(function() {funkyFresh()}, 5000);
-					clearInterval(timer);
-					reset();
-            }
+		const right = correctAnswer === guessedAnswer
+//		alert(`You Got It....${right ? 'Right': 'Wrong'}`);
+		if(right){
+			$("#answer-view").html("You Got It Right");
+		} else {				$("#answer-view").html("You Got It Wrong....Correct Answer Is... " );
+			}
+		setTimeout(function() {funkyFresh()}, 5000);
+		clearInterval(timer);
+		reset();
+	}
 
 function funkyFresh(){
 	$.get('/api/questions', function(questions) {
-    console.log(questions);
-	var question = questions[Math.floor(Math.random() * questions.length)];
-	console.log(question);
-	timer = setInterval(countdownTime, 1000);
-	// let html = `<div id="question1">${question.question}</div>`
-	$("#question-view").html(`
-	<div>
-		<h3>${question.question}</h3>
-	</div>
-	<hr>
-	<div id = "answer-view">
-		<button onclick = "youGotIt('${question.correct}', 'answer1')" class = "waves-effect waves-light btn" id = "answer-choice-1">${question.answer1}</button>
-		<br>
-		<br>
-		<button onclick = "youGotIt('${question.correct}', 'answer2')" class = "waves-effect waves-light btn" id = "answer-choice-2">${question.answer2}</button>
-		<br>
-		<br>
-		<button onclick = "youGotIt('${question.correct}', 'answer3')" class = "waves-effect waves-light btn" id = "answer-choice-3">${question.answer3}</button>
-		<br>
-		<br>
-		<button onclick = "youGotIt('${question.correct}', 'answer4')" class = "waves-effect waves-light btn" id = "answer-choice-4">${question.answer4}</button>
-	div>
-	`);
-		
-		            
-  });
+	    console.log(questions);
+		var question = questions[Math.floor(Math.random() * questions.length)];
+		console.log(question);
+		timer = setInterval(countdownTime, 1000);
+//		let html = `<div id="question1">${question.question}</div>`
+		$("#question-view").html(`
+			<div>
+				<h3>${question.question}</h3>
+			</div>
+			<hr>
+			<div id = "answer-view">
+				<button onclick = "youGotIt('${question.correct}', 'answer1')" class = "waves-effect waves-light btn" id = "answer-choice-1">${question.answer1}</button>
+				<br>
+				<br>
+				<button onclick = "youGotIt('${question.correct}', 'answer2')" class = "waves-effect waves-light btn" id = "answer-choice-2">${question.answer2}</button>
+				<br>
+				<br>
+				<button onclick = "youGotIt('${question.correct}', 'answer3')" class = "waves-effect waves-light btn" id = "answer-choice-3">${question.answer3}</button>
+				<br>
+				<br>
+				<button onclick = "youGotIt('${question.correct}', 'answer4')" class = "waves-effect waves-light btn" id = "answer-choice-4">${question.answer4}</button>
+			<div>
+		`);
+	});
 }
 
 	$('#startGame').on('click', function() {
@@ -139,9 +136,7 @@ function funkyFresh(){
 		if(!timer){
 			funkyFresh();
 		}
-   
-});
-
+   });
 
 var game = {
 	counter: 20,
@@ -151,12 +146,12 @@ var game = {
 }
 
 countdownTime = function () {
-		game.counter--;
-		$("#timer-view").html(game.counter + " seconds left");
-		if (game.counter <= 0) {
-			timesUp();
-		}
+	game.counter--;
+	$("#timer-view").html(game.counter + " seconds left");
+	if (game.counter <= 0) {
+		timesUp();
 	}
+}
 
 	// 	loadQuestion: function () {
 	// 		timer = setInterval(game.countdownTime, 1000);
@@ -216,37 +211,37 @@ countdownTime = function () {
 	// 	// 	$("#buttons-view").empty();
 	// 	// },
 
-		timesUp	 = function () {
-			clearInterval(timer);
-			reset();
-			// $("#time").html("Time has run out. ");
-			// game.incorrectAnswer++;
-			// $("#result").html("The correct answer is " + questions[game.currentQuest].correctAnswer);
-			// if (game.currentQuest == questions.length - 1) {
-			// 	setTimeout(game.results, 3000);
-			// } else {
-			// 	setTimeout(game.nextQuestion, 3000);
-			// }
-			// $("#buttons-view").empty();
-			funkyFresh();
-		}
+	timesUp	 = function () {
+		clearInterval(timer);
+		reset();
+		// $("#time").html("Time has run out. ");
+		// game.incorrectAnswer++;
+		// $("#result").html("The correct answer is " + questions[game.currentQuest].correctAnswer);
+		// if (game.currentQuest == questions.length - 1) {
+		// 	setTimeout(game.results, 3000);
+		// } else {
+		// 	setTimeout(game.nextQuestion, 3000);
+		// }
+		// $("#buttons-view").empty();
+		funkyFresh();
+	}
 
-		reset = function () {
-			// game.currentQuest = 0;
-			game.counter = 20;
-			// game.correct = 0;
-			// game.incorrect = 0;
-			// game.unanswered = 0;
-			// $("#buttons-view").empty();
-			// $("#answer-view").empty();
-			// $("#result").empty();
-			// $("#result1").empty();
-			// $("#result2").empty();
-			// $("#result3").empty();
-			// $("#result4").empty();
-			// $("#result5").empty();
-			// game.loadQuestion();
-		}
+	reset = function () {
+		// game.currentQuest = 0;
+		game.counter = 20;
+		// game.correct = 0;
+		// game.incorrect = 0;
+		// game.unanswered = 0;
+		// $("#buttons-view").empty();
+		// $("#answer-view").empty();
+		// $("#result").empty();
+		// $("#result1").empty();
+		// $("#result2").empty();
+		// $("#result3").empty();
+		// $("#result4").empty();
+		// $("#result5").empty();
+		// game.loadQuestion();
+	}
 
 	// 	click: function (e) {
 	// 		clearInterval(timer);
