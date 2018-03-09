@@ -38,7 +38,7 @@
 	<!-- <hr> -->
 
 	<div id="timer-view">
-		<h4>Timer</h4>
+		<!-- <h4>Timer</h4> -->
 		<!--<div id = "countdown">
 					<div id = "countdown-number"></div>
 					<svg>
@@ -75,6 +75,7 @@
 
 <script type="text/javascript">
 var questions;
+var timer;
 	// $("#startGame").on("click", function () {
 	// 	$(this).hide(1000);
 	// 	game.loadQuestion();
@@ -89,14 +90,24 @@ var questions;
 	// 	game.reset();
 	// })
 	function youGotIt(correctAnswer, guessedAnswer){
-		                const right = correctAnswer === guessedAnswer
-		                alert(`You Got It....${right ? 'Right': 'Wrong'}`);
-		            }
-	$('#startGame').on('click', function() {
-    $.get('/api/questions', function(questions) {
+                const right = correctAnswer === guessedAnswer
+//                 alert(`You Got It....${right ? 'Right': 'Wrong'}`);
+					if(right){
+						$("#answer-view").html("You Got It Right");
+					} else {
+						$("#answer-view").html("You Got It Wrong....Correct Answer Is... " + correctAnswer);
+					}
+					setTimeout(function() {funkyFresh()}, 5000);
+					clearInterval(timer);
+					reset();
+	   
+            }
+function funkyFresh(){
+	$.get('/api/questions', function(questions) {
     console.log(questions);
 	var question = questions[Math.floor(Math.random() * questions.length)];
 	console.log(question);
+	timer = setInterval(countdownTime, 1000);
 	// let html = `<div id="question1">${question.question}</div>`
 	$("#question-view").html(`<div>
 		                    <h3>${question.question}</h3>
@@ -119,24 +130,32 @@ var questions;
 		
 		            
   });
+}
+
+	$('#startGame').on('click', function() {
+    funkyFresh();
 });
 
 
-	// var game = {
-	// 	questions: questions,
-	// 	currentQuest: 0,
-	// 	counter: 20,
-	// 	correctAnswer: 0,
-	// 	incorrectAnswer: 0,
-	// 	unanswered: 0,
+var game = {
+	
+	
+	counter: 20,
+	correctAnswer: 0,
+	incorrectAnswer: 0,
+	unanswered: 0,	
+}
 
-	// 	countdownTime: function () {
-	// 		game.counter--;
-	// 		$("#timer-view").html(game.counter + " seconds left");
-	// 		if (game.counter <= 0) {
-	// 			game.timesUp();
-	// 		}
-	// 	},
+countdownTime = function () {
+		game.counter--;
+		$("#timer-view").html(game.counter + " seconds left");
+		if (game.counter <= 0) {
+			timesUp();
+			
+
+		}
+	}
+
 
 
 	// 	loadQuestion: function () {
@@ -199,35 +218,39 @@ var questions;
 	// 	// 	$("#buttons-view").empty();
 	// 	// },
 
-	// 	timesUp: function () {
-	// 		clearInterval(timer);
-	// 		$("#time").html("Time has run out. ");
-	// 		game.unanswered++;
-	// 		$("#result").html("The correct answer is " + questions[game.currentQuest].correctAnswer);
-	// 		if (game.currentQuest == questions.length - 1) {
-	// 			setTimeout(game.results, 3000);
-	// 		} else {
-	// 			setTimeout(game.nextQuestion, 3000);
-	// 		}
-	// 		$("#buttons-view").empty();
-	// 	},
+		timesUp	 = function () {
+			clearInterval(timer);
+			reset();
+			// $("#time").html("Time has run out. ");
+			// game.incorrectAnswer++;
+			// $("#result").html("The correct answer is " + questions[game.currentQuest].correctAnswer);
+			// if (game.currentQuest == questions.length - 1) {
+			// 	setTimeout(game.results, 3000);
+			// } else {
+			// 	setTimeout(game.nextQuestion, 3000);
+			// }
+			// $("#buttons-view").empty();
+			funkyFresh();
 
-	// 	reset: function () {
-	// 		game.currentQuest = 0;
-	// 		game.counter = 20;
-	// 		game.correct = 0;
-	// 		game.incorrect = 0;
-	// 		game.unanswered = 0;
-	// 		$("#buttons-view").empty();
-	// 		$("#answer-view").empty();
-	// 		$("#result").empty();
-	// 		$("#result1").empty();
-	// 		$("#result2").empty();
-	// 		$("#result3").empty();
-	// 		$("#result4").empty();
-	// 		$("#result5").empty();
-	// 		game.loadQuestion();
-	// 	},
+
+		}
+
+		reset = function () {
+			// game.currentQuest = 0;
+			game.counter = 20;
+			// game.correct = 0;
+			// game.incorrect = 0;
+			// game.unanswered = 0;
+			// $("#buttons-view").empty();
+			// $("#answer-view").empty();
+			// $("#result").empty();
+			// $("#result1").empty();
+			// $("#result2").empty();
+			// $("#result3").empty();
+			// $("#result4").empty();
+			// $("#result5").empty();
+			// game.loadQuestion();
+		}
 
 	// 	click: function (e) {
 	// 		clearInterval(timer);
