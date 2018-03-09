@@ -15,11 +15,10 @@
 <body>
 
 	<!-- <div class="home-header">
-						<h1 class="header center">Let's Go!</h1>
-						<div class = "center-align">
-						
-						</div>
-				</div> -->
+			<h1 class="header center">Let's Go!</h1>
+			<div class = "center-align">
+			</div>
+		</div> -->
 	<div class="home-header">
 		<div class="facebook-button">
 			<a class="waves-effect waves-light btn blue" href="/auth/facebook">Login with Facebook</a>
@@ -41,11 +40,11 @@
 	<div id="timer-view">
 		<!-- <h4>Timer</h4> -->
 		<!--<div id = "countdown">
-					<div id = "countdown-number"></div>
-					<svg>
-					  <circle r="18" cx="20" cy="20"></circle>
-					</svg>
-				</div>-->
+				<div id = "countdown-number"></div>
+				<svg>
+	 				<circle r="18" cx="20" cy="20"></circle>
+				</svg>
+			</div>-->
 	</div>
 	<br>
 	<br>
@@ -54,18 +53,16 @@
 	<div id="answer-view">
 		<!-- <h3>Answer Choices</h3> -->
 		<!--<a class = "waves-effect waves-light btn" id = "answer-choice-1"></a>
-					<br>
-					<br>
-					<a class = "waves-effect waves-light btn" id = "answer-choice-2"></a>
-					<br>
-					<br>
-					<a class = "waves-effect waves-light btn" id = "answer-choice-3"></a>
-					<br>
-					<br>
-					<a class = "waves-effect waves-light btn" id = "answer-choice-4"></a>
-			</div>-->
+			<br>
+			<br>
+			<a class = "waves-effect waves-light btn" id = "answer-choice-2"></a>
+			<br>
+			<br>
+			<a class = "waves-effect waves-light btn" id = "answer-choice-3"></a>
+			<br>
+			<br>
+			<a class = "waves-effect waves-light btn" id = "answer-choice-4"></a>-->
 	</div>
-
 
 	<!-- <hr> -->
 	<div id="result"></div>
@@ -114,24 +111,24 @@ function funkyFresh(){
 	console.log(question);
 	timer = setInterval(countdownTime, 1000);
 	// let html = `<div id="question1">${question.question}</div>`
-	$("#question-view").html(`<div>
-		                    <h3>${question.question}</h3>
-		            </div>
-		            <hr>
-		                
-		            <div id = "answer-view">
-		                    
-                    <button onclick = "youGotIt('${question.correct}', 'answer1')" class = "waves-effect waves-light btn" id = "answer-choice-1">${question.answer1}</button>
-                    <br>
-                    <br>
-                    <button onclick = "youGotIt('${question.correct}', 'answer2')" class = "waves-effect waves-light btn" id = "answer-choice-2">${question.answer2}</button>
-                    <br>
-                    <br>
-                    <button onclick = "youGotIt('${question.correct}', 'answer3')" class = "waves-effect waves-light btn" id = "answer-choice-3">${question.answer3}</button>
-                    <br>
-                    <br>
-                    <button onclick = "youGotIt('${question.correct}', 'answer4')" class = "waves-effect waves-light btn" id = "answer-choice-4">${question.answer4}</button>
-		            </div>`);
+	$("#question-view").html(`
+	<div>
+		<h3>${question.question}</h3>
+	</div>
+	<hr>
+	<div id = "answer-view">
+		<button onclick = "youGotIt('${question.correct}', 'answer1')" class = "waves-effect waves-light btn" id = "answer-choice-1">${question.answer1}</button>
+		<br>
+		<br>
+		<button onclick = "youGotIt('${question.correct}', 'answer2')" class = "waves-effect waves-light btn" id = "answer-choice-2">${question.answer2}</button>
+		<br>
+		<br>
+		<button onclick = "youGotIt('${question.correct}', 'answer3')" class = "waves-effect waves-light btn" id = "answer-choice-3">${question.answer3}</button>
+		<br>
+		<br>
+		<button onclick = "youGotIt('${question.correct}', 'answer4')" class = "waves-effect waves-light btn" id = "answer-choice-4">${question.answer4}</button>
+	div>
+	`);
 		
 		            
   });
@@ -139,7 +136,6 @@ function funkyFresh(){
 
 	$('#startGame').on('click', function() {
 		$(this).addClass("hideButton");
-		
 		if(!timer){
 			funkyFresh();
 		}
@@ -148,8 +144,6 @@ function funkyFresh(){
 
 
 var game = {
-	
-	
 	counter: 20,
 	correctAnswer: 0,
 	incorrectAnswer: 0,
@@ -161,12 +155,8 @@ countdownTime = function () {
 		$("#timer-view").html(game.counter + " seconds left");
 		if (game.counter <= 0) {
 			timesUp();
-			
-
 		}
 	}
-
-
 
 	// 	loadQuestion: function () {
 	// 		timer = setInterval(game.countdownTime, 1000);
@@ -179,8 +169,6 @@ countdownTime = function () {
 	// 			a.attr("data-name", questions[game.currentQuest].answers[i]);
 	// 			a.text(questions[game.currentQuest].answers[i]);
 	// 			$("#answer-view").append(a);
-
-
 	// 		}
 	// 	},
 
@@ -241,8 +229,6 @@ countdownTime = function () {
 			// }
 			// $("#buttons-view").empty();
 			funkyFresh();
-
-
 		}
 
 		reset = function () {
@@ -266,14 +252,10 @@ countdownTime = function () {
 	// 		clearInterval(timer);
 	// 		if ($(e.target).data("name") == questions[game.currentQuest].correctAnswer) {
 	// 			game.correct();
-
 	// 		} else {
 	// 			game.incorrect();
 	// 		}
-
 	// 	}
 	// }
 </script>
-
 </html>
-
