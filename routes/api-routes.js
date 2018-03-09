@@ -25,6 +25,7 @@ module.exports = function(app) {
   });
 
 
+  
   app.get("/api/questions", function(req, res) {
     console.log(req.body);
     // create takes an argument of an object describing the item we want to
@@ -32,6 +33,7 @@ module.exports = function(app) {
     // and complete property (req.body)
     db.qs.findAll({}).then(function(qs) {
       // We have access to the todos as an argument inside of the callback function
+
       res.json(qs);
       
     });
