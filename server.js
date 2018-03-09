@@ -17,21 +17,25 @@ const PORT = process.env.PORT || 8080;
 
 var mysql = require('mysql');
 
-var con = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "root",
-  database: "ephemera",
-  port: 3306
-});
+// var con = mysql.createConnection({
+//   host: "localhost",
+//   user: "root",
+//   password: "root",
+//   database: "ephemera",
+//   port: 8889
+// });
 
-con.connect(function(err) {
-  if (err) throw err;
-  con.query("SELECT * FROM qs", function (err, result, fields) {
-    if (err) throw err;
-    console.log(result);
-  });
-});
+
+
+// app.get("/api/questions", function(req, res, err) {
+//   con.connect(function(err) {
+//     if (err) throw err;
+//     con.query("SELECT * FROM qs", function (err, result, fields) {
+//       if (err) throw err;
+//       res.json(result);
+//     });
+//   });
+// });
 // Requiring our models for syncing
 const db = require("./models");
 
