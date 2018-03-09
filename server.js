@@ -18,7 +18,7 @@ const env = require('dotenv').load();
 const express = require('express');
 const app = express();
 
-const PORT = process.env.PORT || 8080;
+var PORT = process.env.PORT || 8081;
 
 var mysql = require('mysql');
 
