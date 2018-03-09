@@ -10,6 +10,9 @@ const session = require('express-session');
 const bodyParser = require('body-parser');
 const env = require('dotenv').load();
 
+
+
+
 // Sets up the Express App
 // =============================================================
 const express = require('express');
@@ -17,9 +20,33 @@ const app = express();
 
 const PORT = process.env.PORT || 8080;
 
+var mysql = require('mysql');
+
+var con = mysql.createConnection({
+  host: "localhost",
+  user: "root",
+  password: "root",
+  database: "ephemera",
+  port: 3306
+});
+
+con.connect(function(err) {
+  if (err) throw err;
+  con.query("SELECT * FROM qs", function (err, result, fields) {
+    if (err) throw err;
+    console.log(result);
+  });
+});
 // Requiring our models for syncing
 const db = require("./models");
 const models = require('./models');
+
+require('./routes/api-routes.js')(app);
+
+
+
+require('./routes/html-routes.js')(app);
+
 
 // Sets up the Express app to handle data parsing
 
@@ -49,9 +76,10 @@ app.use(passport.session());
 
 // Syncing our sequelize models and then starting our Express app
 // =============================================================
-db.sequelize.sync({ force: true }).then(function() {
+db.sequelize.sync({ force: false }).then(function() {
   app.listen(PORT, function() {
     console.log("App listening on PORT " + PORT);
+
   });
 });
 
@@ -69,3 +97,8 @@ models.sequelize
   .catch(function(err) {
     console.log(err, 'Error on Database Sync. Please try again!');
   });
+
+// var db        = {};
+// db.sequelize = sequelize;
+// db.Sequelize = Sequelize;
+// module.exports = db;

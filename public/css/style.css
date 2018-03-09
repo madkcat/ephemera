@@ -1,9 +1,9 @@
 body {
   background-color: rgb(246, 181, 255);
 }
-
+/* home header */
 .home-header {
-  height: 500px;
+  height: 100%;
   /* background-color: lightblue; */
   background: url("../images/homeBackground.jpg") no-repeat;
   background-size: 100%;
@@ -22,21 +22,35 @@ body {
 .header{
   padding-top: 0;
 }
-
+/* facebook button */
 .facebook-button {
   float: right;
   margin: 3% 1% 
 }
-
+/* start button */
 .begin-button {
   width: 100%;
   height: 50px;
   background-color: rgb(1, 0, 75);
 }
 
+/* start game button */
+#startGame {
+  width: 500px;
+  background-color: rgb(187, 4, 187);
+  font-size: 30px;
+  margin-bottom: 2%;
+}
+
+/* answer buttons */
+.answer-btn {
+  width: 300px;
+  margin: 1%;
+  
+}
+
 .high-scores {
   font-size: 20px;
-
 }
 
 #countdown {

@@ -19,6 +19,8 @@
   },
   "homepage": "https://github.com/madkcat/ephemera#readme",
   "dependencies": {
+    "fs": "0.0.1-security",
+    "mysql": "^2.15.0",
     "bcrypt-node": "^0.1.0",
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.18.2",
