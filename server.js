@@ -4,18 +4,39 @@
 // ******************************************************************************
 // *** Dependencies
 // =============================================================
-const express = require("express");
-const bodyParser = require("body-parser");
+const path = require('path');
+const passport = require('passport');
+const session = require('express-session');
+const bodyParser = require('body-parser');
+const env = require('dotenv').load();
 
 
 
 
 // Sets up the Express App
 // =============================================================
+const express = require('express');
 const app = express();
-const PORT = process.env.PORT || 8080;
+
+var PORT = process.env.PORT || 8081;
 
 var mysql = require('mysql');
+
+var con = mysql.createConnection({
+  host: "localhost",
+  user: "root",
+  password: "arrowhead25",
+  database: "ephemera",
+  port: 3306
+});
+
+con.connect(function(err) {
+  if (err) throw err;
+  con.query("SELECT * FROM qs", function (err, result, fields) {
+    if (err) throw err;
+    console.log(result);
+  });
+});
 
 // var con = mysql.createConnection({
 //   host: "localhost",
@@ -38,6 +59,7 @@ var mysql = require('mysql');
 // });
 // Requiring our models for syncing
 const db = require("./models");
+const models = require('./models');
 
 require('./routes/api-routes.js')(app);
 
@@ -58,7 +80,19 @@ app.use(express.static("public"));
 
 // Routes
 // =============================================================
+const authRoute = require('./controllers/auth.js')(app, passport);
 
+// Strategies
+// =============================================================
+require('./config/passport/passport.js')(passport, models.user);
+
+// Passport
+// =============================================================
+app.use(
+  session({ secret: 'rHUyjs6RmVOD06OdOTsVAyUUCxVXaWci', resave: true, saveUninitialized: true })
+); // session secret
+app.use(passport.initialize());
+app.use(passport.session());
 
 // Syncing our sequelize models and then starting our Express app
 // =============================================================
@@ -68,6 +102,22 @@ db.sequelize.sync({ force: false }).then(function() {
 
   });
 });
+
+// Sync Database
+models.sequelize
+  .sync()
+  .then(function() {
+    console.log('Database Connected');
+
+    app.listen(8080, function(err) {
+      if (!err) console.log('Connected at http://localhost:8080');
+      else console.log(err);
+    });
+  })
+  .catch(function(err) {
+    console.log(err, 'Error on Database Sync. Please try again!');
+  });
+
 // var db        = {};
 // db.sequelize = sequelize;
 // db.Sequelize = Sequelize;
