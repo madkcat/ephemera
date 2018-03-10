@@ -10,6 +10,7 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
 	<link rel="stylesheet" href="./css/style.css">
 	<script src="https://code.jquery.com/jquery.js"></script>
+	<link href="https://fonts.googleapis.com/css?family=Sue+Ellen+Francisco" rel="stylesheet">
 </head>
 
 <body>
@@ -24,17 +25,20 @@
 			<a class="waves-effect waves-light btn blue" href="/auth/facebook">Login with Facebook</a>
 		</div>
 
-		<h1 class="header center">Let's Go!</h1>
+		<h1 class="header-play">Are You Ready?</h1>
 		<div class="center-align">
-			<a class="waves-effect waves-light btn" id="startGame">Start!</a>
+
 		</div>
 	</div>
-
-	<div class="container">
-	<div id="question-view">
-		<!-- <h3>Question</h3> -->
+	<div class="center-align">
+		<a class="waves-effect waves-light btn" id="startGame">Begin</a>
 	</div>
-</div>
+	<div id="timer-view" class="center"></div>
+	<div class="container">
+		<div id="question-view">
+			<!-- <h3>Question</h3> -->
+		</div>
+	</div>
 	<!-- <hr> -->
 
 	<div id="timer-view">
@@ -72,6 +76,8 @@
 	<div id="result4"></div>
 	<div id="result5"></div>
 
+
+
 </body>
 
 <script type="text/javascript">
@@ -81,15 +87,21 @@ correctAnswer = 0;
 incorrectAnswer = 0;
 numberQuestions = 0;
 
-	// $("#startGame").on("click", function () {
-	// 	$(this).hide(1000);
-	// 	game.loadQuestion();
-	// });
 
-	// $(document).on("click", ".answer-btn", function (e) {
-	// 	game.click(e)
-	// 	console.log("button clicked");
-	// })
+	function youGotIt(correctAnswer, guessedAnswer) {                
+		const right = correctAnswer === guessedAnswer
+		//                 alert(`You Got It....${right ? 'Right': 'Wrong'}`);
+		if (right) {
+			$("#answer-view").html("You Got It Right");
+		} else {
+			$("#answer-view").html("You Got It Wrong....Correct Answer Is... ");
+		}
+		setTimeout(function () {
+			funkyFresh()
+		}, 5000);
+		clearInterval(timer);
+		reset();            
+	}
 
 	// $(document).on("click", ".reset", function () {
 	// 	game.reset();
@@ -139,7 +151,11 @@ function funkyFresh(){
 	numberQuestion++;
 }
 
-	$('#startGame').on('click', function() {
+			            
+		});
+	}
+
+	$('#startGame').on('click', function () {
 		$(this).addClass("hideButton");
 		if(!timer){
 			funkyFresh();
