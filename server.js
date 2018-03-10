@@ -22,13 +22,20 @@ var PORT = process.env.PORT || 8080;
 
 var mysql = require('mysql');
 
-var con = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "root",
-  database: "ephemera",
-  port: 8889
-});
+var con;
+if(process.env.JAWSDB_URL) {
+  //Heroku deployment
+    con = mysql.createConnection(process.env.JAWSDB_URL);
+} else {
+  //local host
+    con = mysql.createConnection({
+      host: "localhost",
+      user: "root",
+      password: "root",
+      database: "ephemera",
+      port: 3306
+    });
+};
 
 con.connect(function(err) {
   if (err) throw err;
