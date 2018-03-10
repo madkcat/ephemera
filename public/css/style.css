@@ -98,17 +98,16 @@ to {background-position: -180px 0px;}
   align: center;
   color: white;
   font-family: 'Sue Ellen Francisco', cursive;
-  font-size: 50px;
+  font-size: 75px;
   
 }
+
 .question-button {
   width: 30%;
   float: left;
   margin: 3%;
 }
-#answer-view{
 
-}
 
 .high-scores {
   font-size: 20px;
@@ -158,4 +157,20 @@ svg circle {
   to {
     stroke-dashoffset: 113px;
   }
+}
+
+#result1{
+  font-size: 30px;
+  align:center;
+  color: white;
+}
+#result2{
+  font-size: 30px;
+  align:center;
+  color: white;
+}
+#result3{
+  font-size: 30px;
+  align:center;
+  color: white;
 }

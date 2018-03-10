@@ -69,12 +69,15 @@
 	</div>
 
 	<!-- <hr> -->
-	<div id="result"></div>
-	<div id="result1"></div>
-	<div id="result2"></div>
-	<div id="result3"></div>
-	<div id="result4"></div>
-	<div id="result5"></div>
+	<div class="container results">
+			<div id="result"></div>
+			<div id="result1"></div>
+			<div id="result2"></div>
+			<div id="result3"></div>
+			<div id="result4"></div>
+			<div id="result5"></div>
+	</div>
+	
 
 
 
@@ -83,36 +86,40 @@
 <script type="text/javascript">
 var questions;
 var timer;
-correctAnswer = 0;
+var correctCounter = 0;
+correctAnswer = "";
 incorrectAnswer = 0;
-numberQuestions = 0;
+numberQuestion = 0;
 
 
-	function youGotIt(correctAnswer, guessedAnswer) {                
-		const right = correctAnswer === guessedAnswer
-		//                 alert(`You Got It....${right ? 'Right': 'Wrong'}`);
-		if (right) {
-			$("#answer-view").html("You Got It Right");
-		} else {
-			$("#answer-view").html("You Got It Wrong....Correct Answer Is... ");
-		}
-		setTimeout(function () {
-			funkyFresh()
-		}, 5000);
-		clearInterval(timer);
-		reset();            
-	}
+	// function youGotIt(correctAnswer, guessedAnswer) {                
+	// 	const right = correctAnswer === guessedAnswer
+	// 	//                 alert(`You Got It....${right ? 'Right': 'Wrong'}`);
+	// 	if (right) {
+	// 		$("#answer-view").html("You Got It Right");
+	// 	} else {
+	// 		$("#answer-view").html("You Got It Wrong....Correct Answer Is... ");
+	// 	}
+	// 	setTimeout(function () {
+	// 		funkyFresh()
+	// 	}, 5000);
+	// 	clearInterval(timer);
+	// 	reset();            
+	// }
 
 	// $(document).on("click", ".reset", function () {
 	// 	game.reset();
 	// })
-	function youGotIt(correctAnswer, guessedAnswer){
-		const right = correctAnswer === guessedAnswer
+	function youGotIt(correctAnswer, guessedAnswer, actualAnswer){
+		const question = JSON.parse(decodeURI(actualAnswer));
+		const right = correctAnswer === guessedAnswer;
 //		alert(`You Got It....${right ? 'Right': 'Wrong'}`);
+// console.log(JSON.stringify(question));
 		if(right){
 			$("#answer-view").html("You Got It Right");
-			correctAnswer++;
-		} else {				$("#answer-view").html("You Got It Wrong....Correct Answer Is... " );
+			correctCounter++;
+		} else {				$("#answer-view").html("You Got It Wrong....Correct Answer Is... " + question[question.correct]);
+		
 		incorrectAnswer++;
 			}
 			if (numberQuestion <= 10) {
@@ -126,25 +133,26 @@ function funkyFresh(){
 	$.get('/api/questions', function(questions) {
 	    console.log(questions);
 		var question = questions[Math.floor(Math.random() * questions.length)];
-		console.log(question);
+
+		console.log("poo",question);
 		timer = setInterval(countdownTime, 1000);
 //		let html = `<div id="question1">${question.question}</div>`
 		$("#question-view").html(`
 			<div>
-				<h3>${question.question}</h3>
+				<h3 class="center">${question.question}</h3>
 			</div>
 			<hr>
 			<div id = "answer-view">
-				<button onclick = "youGotIt('${question.correct}', 'answer1')" class = "waves-effect waves-light btn" id = "answer-choice-1">${question.answer1}</button>
+				<button onclick = "youGotIt('${question.correct}', 'answer1', '${encodeURI(JSON.stringify(question))}')" class = "waves-effect waves-light btn" id = "answer-choice-1">${question.answer1}</button>
 				<br>
 				<br>
-				<button onclick = "youGotIt('${question.correct}', 'answer2')" class = "waves-effect waves-light btn" id = "answer-choice-2">${question.answer2}</button>
+				<button onclick = "youGotIt('${question.correct}', 'answer2','${encodeURI(JSON.stringify(question))}')" class = "waves-effect waves-light btn" id = "answer-choice-2">${question.answer2}</button>
 				<br>
 				<br>
-				<button onclick = "youGotIt('${question.correct}', 'answer3')" class = "waves-effect waves-light btn" id = "answer-choice-3">${question.answer3}</button>
+				<button onclick = "youGotIt('${question.correct}', 'answer3', '${encodeURI(JSON.stringify(question))}')" class = "waves-effect waves-light btn" id = "answer-choice-3">${question.answer3}</button>
 				<br>
 				<br>
-				<button onclick = "youGotIt('${question.correct}', 'answer4')" class = "waves-effect waves-light btn" id = "answer-choice-4">${question.answer4}</button>
+				<button onclick = "youGotIt('${question.correct}', 'answer4', '${encodeURI(JSON.stringify(question))}')" class = "waves-effect waves-light btn" id = "answer-choice-4">${question.answer4}</button>
 			<div>
 		`);
 	});
@@ -168,7 +176,7 @@ var game = {
 
 countdownTime = function () {
 	game.counter--;
-	$("#timer-view").html(game.counter + " seconds left");
+	$("#timer-view").html(game.counter);
 	if (game.counter <= 0) {
 		timesUp();
 	}
@@ -198,7 +206,7 @@ countdownTime = function () {
 	 	results = function () {
 			clearInterval(timer);
 			$("#result1").html("Game Over");
-	 		$("#result2").html("Correct Answers: " + correctAnswer);
+	 		$("#result2").html("Correct Answers: " + correctCounter);
 	 		$("#result3").html("Incorrect Answers: " + incorrectAnswer);
 	 		//$("#result4").html("Unanswered: " + game.unanswered);
 	 		$("#result5").html("<button class='reset btn-primary' id = 'startGame'>Play Again</button>");
@@ -262,6 +270,7 @@ countdownTime = function () {
 		// $("#result4").empty();
 		// $("#result5").empty();
 		// game.loadQuestion();
+	
 	}
 
 	// 	click: function (e) {
