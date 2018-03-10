@@ -185,8 +185,8 @@ countdownTime = function () {
 	 	results = function () {
 			clearInterval(timer);
 			$("#result1").html("Game Over");
-	 		$("#result2").html("Correct Answers: " + game.correctAnswer);
-	 		$("#result3").html("Incorrect Answers: " + game.incorrectAnswer);
+	 		$("#result2").html("Correct Answers: " + correctAnswer);
+	 		$("#result3").html("Incorrect Answers: " + incorrectAnswer);
 	 		//$("#result4").html("Unanswered: " + game.unanswered);
 	 		$("#result5").html("<button class='reset btn-primary' id = 'startGame'>Play Again</button>");
 	 	},
