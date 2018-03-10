@@ -25,9 +25,11 @@ var mysql = require('mysql');
 var con;
 if(process.env.JAWSDB_URL) {
   //Heroku deployment
+  console.log(process.env.JAWSDB_URL);
     con = mysql.createConnection(process.env.JAWSDB_URL);
 } else {
   //local host
+  console.log("local thing space");
     con = mysql.createConnection({
       host: "localhost",
       user: "root",
@@ -38,7 +40,10 @@ if(process.env.JAWSDB_URL) {
 };
 
 con.connect(function(err) {
-  if (err) throw err;
+  if (err) {
+    console.log("something broke" + err);
+    throw err;
+  }
   con.query("SELECT * FROM qs", function (err, result, fields) {
     if (err) throw err;
     console.log(result);
