@@ -77,6 +77,9 @@
 <script type="text/javascript">
 var questions;
 var timer;
+correctAnswer = 0;
+incorrectAnswer = 0;
+numberQuestions = 0;
 
 	// $("#startGame").on("click", function () {
 	// 	$(this).hide(1000);
@@ -96,11 +99,15 @@ var timer;
 //		alert(`You Got It....${right ? 'Right': 'Wrong'}`);
 		if(right){
 			$("#answer-view").html("You Got It Right");
+			correctAnswer++;
 		} else {				$("#answer-view").html("You Got It Wrong....Correct Answer Is... " );
+		incorrectAnswer++;
 			}
+			if (numberQuestion <= 10) {
 		setTimeout(function() {funkyFresh()}, 5000);
 		clearInterval(timer);
 		reset();
+			} else {results()};
 	}
 
 function funkyFresh(){
@@ -129,6 +136,7 @@ function funkyFresh(){
 			<div>
 		`);
 	});
+	numberQuestion++;
 }
 
 	$('#startGame').on('click', function() {
@@ -174,14 +182,14 @@ countdownTime = function () {
 	// 		game.loadQuestion();
 	// 	},
 
-	// 	results: function () {
-	// 		clearInterval(timer);
-	// 		$("#result1").html("Game Over");
-	// 		$("#result2").html("Correct Answers: " + game.correctAnswer);
-	// 		$("#result3").html("Incorrect Answers: " + game.incorrectAnswer);
-	// 		$("#result4").html("Unanswered: " + game.unanswered);
-	// 		$("#result5").html("<button class='reset btn-primary' id = 'startGame'>Play Again</button>");
-	// 	},
+	 	results = function () {
+			clearInterval(timer);
+			$("#result1").html("Game Over");
+	 		$("#result2").html("Correct Answers: " + game.correctAnswer);
+	 		$("#result3").html("Incorrect Answers: " + game.incorrectAnswer);
+	 		//$("#result4").html("Unanswered: " + game.unanswered);
+	 		$("#result5").html("<button class='reset btn-primary' id = 'startGame'>Play Again</button>");
+	 	},
 
 
 	// 	// correct: function () {
