@@ -18,16 +18,16 @@ const env = require('dotenv').load();
 const express = require('express');
 const app = express();
 
-var PORT = process.env.PORT || 8081;
+var PORT = process.env.PORT || 8080;
 
 var mysql = require('mysql');
 
 var con = mysql.createConnection({
   host: "localhost",
   user: "root",
-  password: "arrowhead25",
+  password: "root",
   database: "ephemera",
-  port: 3306
+  port: 8889
 });
 
 con.connect(function(err) {
@@ -104,19 +104,19 @@ db.sequelize.sync({ force: false }).then(function() {
 });
 
 // Sync Database
-models.sequelize
-  .sync()
-  .then(function() {
-    console.log('Database Connected');
+// models.sequelize
+//   .sync()
+//   .then(function() {
+//     console.log('Database Connected');
 
-    app.listen(8080, function(err) {
-      if (!err) console.log('Connected at http://localhost:8080');
-      else console.log(err);
-    });
-  })
-  .catch(function(err) {
-    console.log(err, 'Error on Database Sync. Please try again!');
-  });
+  //   app.listen(PORT, function(err) {
+  //     if (!err) console.log('Connected at http://localhost:8080');
+  //     else console.log(err);
+  //   });
+  // })
+  // .catch(function(err) {
+  //   console.log(err, 'Error on Database Sync. Please try again!');
+  // });
 
 // var db        = {};
 // db.sequelize = sequelize;

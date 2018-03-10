@@ -10,6 +10,7 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
 	<link rel="stylesheet" href="./css/style.css">
 	<script src="https://code.jquery.com/jquery.js"></script>
+	<link href="https://fonts.googleapis.com/css?family=Sue+Ellen+Francisco" rel="stylesheet">
 </head>
 
 <body>
@@ -25,45 +26,29 @@
 			<a class="waves-effect waves-light btn blue" href="/auth/facebook">Login with Facebook</a>
 		</div>
 
-		<h1 class="header center">Let's Go!</h1>
+		<h1 class="header-play">Are You Ready?</h1>
 		<div class="center-align">
-			<a class="waves-effect waves-light btn" id="startGame">Start!</a>
+
 		</div>
 	</div>
-
-	<div class="container">
-	<div id="question-view">
-		<!-- <h3>Question</h3> -->
+	<div class="center-align">
+		<a class="waves-effect waves-light btn" id="startGame">Begin</a>
 	</div>
-</div>
+	<div id="timer-view" class="center"></div>
+	<div class="container">
+		<div id="question-view">
+			<!-- <h3>Question</h3> -->
+		</div>
+	</div>
 	<!-- <hr> -->
 
-	<div id="timer-view">
-		<!-- <h4>Timer</h4> -->
-		<!--<div id = "countdown">
-					<div id = "countdown-number"></div>
-					<svg>
-					  <circle r="18" cx="20" cy="20"></circle>
-					</svg>
-				</div>-->
-	</div>
+	
 	<br>
 	<br>
 	<br>
 	<!-- <hr> -->
 	<div id="answer-view">
-		<!-- <h3>Answer Choices</h3> -->
-		<!--<a class = "waves-effect waves-light btn" id = "answer-choice-1"></a>
-					<br>
-					<br>
-					<a class = "waves-effect waves-light btn" id = "answer-choice-2"></a>
-					<br>
-					<br>
-					<a class = "waves-effect waves-light btn" id = "answer-choice-3"></a>
-					<br>
-					<br>
-					<a class = "waves-effect waves-light btn" id = "answer-choice-4"></a>
-			</div>-->
+		
 	</div>
 
 
@@ -75,93 +60,88 @@
 	<div id="result4"></div>
 	<div id="result5"></div>
 
+
+
 </body>
 
 <script type="text/javascript">
-var questions;
-var timer;
+	var questions;
+	var timer;
 
-	// $("#startGame").on("click", function () {
-	// 	$(this).hide(1000);
-	// 	game.loadQuestion();
-	// });
 
-	// $(document).on("click", ".answer-btn", function (e) {
-	// 	game.click(e)
-	// 	console.log("button clicked");
-	// })
+	function youGotIt(correctAnswer, guessedAnswer) {                
+		const right = correctAnswer === guessedAnswer
+		//                 alert(`You Got It....${right ? 'Right': 'Wrong'}`);
+		if (right) {
+			$("#answer-view").html("You Got It Right");
+		} else {
+			$("#answer-view").html("You Got It Wrong....Correct Answer Is... ");
+		}
+		setTimeout(function () {
+			funkyFresh()
+		}, 5000);
+		clearInterval(timer);
+		reset();            
+	}
 
-	// $(document).on("click", ".reset", function () {
-	// 	game.reset();
-	// })
-	function youGotIt(correctAnswer, guessedAnswer){
-                const right = correctAnswer === guessedAnswer
-//                 alert(`You Got It....${right ? 'Right': 'Wrong'}`);
-					if(right){
-						$("#answer-view").html("You Got It Right");
-					} else {
-						$("#answer-view").html("You Got It Wrong....Correct Answer Is... " );
-					}
-					setTimeout(function() {funkyFresh()}, 5000);
-					clearInterval(timer);
-					reset();
-            }
-
-function funkyFresh(){
-	$.get('/api/questions', function(questions) {
-    console.log(questions);
-	var question = questions[Math.floor(Math.random() * questions.length)];
-	console.log(question);
-	timer = setInterval(countdownTime, 1000);
-	// let html = `<div id="question1">${question.question}</div>`
-	$("#question-view").html(`<div>
-		                    <h3>${question.question}</h3>
+	function funkyFresh() {
+		$.get('/api/questions', function (questions) {
+			console.log(questions);
+			var question = questions[Math.floor(Math.random() * questions.length)];
+			console.log(question);
+			timer = setInterval(countdownTime, 1000);
+			// let html = `<div id="question1">${question.question}</div>`
+			$("#question-view").html(
+				`<div>
+		                    <h3 class="center">${question.question}</h3>
 		            </div>
-		            <hr>
+		           
 		                
-		            <div id = "answer-view">
-		                    
-                    <button onclick = "youGotIt('${question.correct}', 'answer1')" class = "waves-effect waves-light btn" id = "answer-choice-1">${question.answer1}</button>
-                    <br>
-                    <br>
-                    <button onclick = "youGotIt('${question.correct}', 'answer2')" class = "waves-effect waves-light btn" id = "answer-choice-2">${question.answer2}</button>
-                    <br>
-                    <br>
-                    <button onclick = "youGotIt('${question.correct}', 'answer3')" class = "waves-effect waves-light btn" id = "answer-choice-3">${question.answer3}</button>
-                    <br>
-                    <br>
-                    <button onclick = "youGotIt('${question.correct}', 'answer4')" class = "waves-effect waves-light btn" id = "answer-choice-4">${question.answer4}</button>
-		            </div>`);
-		
-		            
-  });
-}
+		            <div class="row" id = "answer-view">
+		    <div class="col-xs-3">
+                    <button onclick = "youGotIt('${question.correct}', 'answer1')" class = "waves-effect waves-light btn question-button" id = "answer-choice-1">${question.answer1}</button>
+			</div>
+			<div class="col-xs-3">
+                    <button onclick = "youGotIt('${question.correct}', 'answer2')" class = "waves-effect waves-light btn question-button" id = "answer-choice-2">${question.answer2}</button>
+            </div>
+			<div class="col-xs-3">       
+                    <button onclick = "youGotIt('${question.correct}', 'answer3')" class = "waves-effect waves-light btn question-button" id = "answer-choice-3">${question.answer3}</button>
+            </div>
+			<div class="col-xs-3">        
+                    <button onclick = "youGotIt('${question.correct}', 'answer4')" class = "waves-effect waves-light btn question-button" id = "answer-choice-4">${question.answer4}</button>
+		        </div>    
+			</div>`
+			);
 
-	$('#startGame').on('click', function() {
+			            
+		});
+	}
+
+	$('#startGame').on('click', function () {
 		$(this).addClass("hideButton");
-		
-		if(!timer){
+
+		if (!timer) {
 			funkyFresh();
 		}
-   
-});
+
+	});
 
 
-var game = {
-	
-	
-	counter: 20,
-	correctAnswer: 0,
-	incorrectAnswer: 0,
-	unanswered: 0,	
-}
+	var game = {
 
-countdownTime = function () {
+
+		counter: 20,
+		correctAnswer: 0,
+		incorrectAnswer: 0,
+		unanswered: 0,
+	}
+
+	countdownTime = function () {
 		game.counter--;
-		$("#timer-view").html(game.counter + " seconds left");
+		$("#timer-view").html(game.counter);
 		if (game.counter <= 0) {
 			timesUp();
-			
+
 
 		}
 	}
@@ -228,39 +208,39 @@ countdownTime = function () {
 	// 	// 	$("#buttons-view").empty();
 	// 	// },
 
-		timesUp	 = function () {
-			clearInterval(timer);
-			reset();
-			// $("#time").html("Time has run out. ");
-			// game.incorrectAnswer++;
-			// $("#result").html("The correct answer is " + questions[game.currentQuest].correctAnswer);
-			// if (game.currentQuest == questions.length - 1) {
-			// 	setTimeout(game.results, 3000);
-			// } else {
-			// 	setTimeout(game.nextQuestion, 3000);
-			// }
-			// $("#buttons-view").empty();
-			funkyFresh();
+	timesUp = function () {
+		clearInterval(timer);
+		reset();
+		// $("#time").html("Time has run out. ");
+		// game.incorrectAnswer++;
+		// $("#result").html("The correct answer is " + questions[game.currentQuest].correctAnswer);
+		// if (game.currentQuest == questions.length - 1) {
+		// 	setTimeout(game.results, 3000);
+		// } else {
+		// 	setTimeout(game.nextQuestion, 3000);
+		// }
+		// $("#buttons-view").empty();
+		funkyFresh();
 
 
-		}
+	}
 
-		reset = function () {
-			// game.currentQuest = 0;
-			game.counter = 20;
-			// game.correct = 0;
-			// game.incorrect = 0;
-			// game.unanswered = 0;
-			// $("#buttons-view").empty();
-			// $("#answer-view").empty();
-			// $("#result").empty();
-			// $("#result1").empty();
-			// $("#result2").empty();
-			// $("#result3").empty();
-			// $("#result4").empty();
-			// $("#result5").empty();
-			// game.loadQuestion();
-		}
+	reset = function () {
+		// game.currentQuest = 0;
+		game.counter = 20;
+		// game.correct = 0;
+		// game.incorrect = 0;
+		// game.unanswered = 0;
+		// $("#buttons-view").empty();
+		// $("#answer-view").empty();
+		// $("#result").empty();
+		// $("#result1").empty();
+		// $("#result2").empty();
+		// $("#result3").empty();
+		// $("#result4").empty();
+		// $("#result5").empty();
+		// game.loadQuestion();
+	}
 
 	// 	click: function (e) {
 	// 		clearInterval(timer);
@@ -276,4 +256,3 @@ countdownTime = function () {
 </script>
 
 </html>
-
