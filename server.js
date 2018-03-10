@@ -35,7 +35,7 @@ if(process.env.JAWSDB_URL) {
       user: "root",
       password: "root",
       database: "ephemera",
-      port: 3306
+      port: 8889
     });
 };
 
